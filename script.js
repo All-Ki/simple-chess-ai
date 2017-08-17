@@ -8,8 +8,8 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     var newGameMoves = game.ugly_moves();
     var bestMove = -9999;
     var bestMoveFound;
-
-    for(var i = 0; i < newGameMoves.length; i++) {
+    var iter =  newGameMoves.length
+    for(var i = 0; i <iter; i++) {
         var newGameMove = newGameMoves[i]
         game.ugly_move(newGameMove);
         var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
@@ -32,7 +32,8 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
 
     if (isMaximisingPlayer) {
         var bestMove = -9999;
-        for (var i = 0; i < newGameMoves.length; i++) {
+        var iter = newGameMoves.length
+        for (var i = 0; i <iter; i++) {
             game.ugly_move(newGameMoves[i]);
             bestMove = Math.max(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
             game.undo();
@@ -44,7 +45,8 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
         return bestMove;
     } else {
         var bestMove = 9999;
-        for (var i = 0; i < newGameMoves.length; i++) {
+        var iter = newGameMoves.length
+        for (var i = 0; i < iter; i++) {
             game.ugly_move(newGameMoves[i]);
             bestMove = Math.min(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
             game.undo();
@@ -221,7 +223,8 @@ var getBestMove = function (game) {
 var renderMoveHistory = function (moves) {
     var historyElement = $('#move-history').empty();
     historyElement.empty();
-    for (var i = 0; i < moves.length; i = i + 2) {
+    var iter = moves.length
+    for (var i = 0; i < iter; i = i + 2) {
         historyElement.append('<span>' + moves[i] + ' ' + ( moves[i + 1] ? moves[i + 1] : ' ') + '</span><br>')
     }
     historyElement.scrollTop(historyElement[0].scrollHeight);
@@ -258,8 +261,8 @@ var onMouseoverSquare = function(square, piece) {
     if (moves.length === 0) return;
 
     greySquare(square);
-
-    for (var i = 0; i < moves.length; i++) {
+    var iter = moves.length
+    for (var i = 0; i < iter; i++) {
         greySquare(moves[i].to);
     }
 };
